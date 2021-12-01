@@ -3,8 +3,9 @@
 def count_increases(numbers):
     counter = 0
     for i in range(1,len(numbers)):
-        if (numbers[i] > numbers[i-1]):
-            counter += 1
+        counter += (numbers[i] > numbers[i-1])
+#        if (numbers[i] > numbers[i-1]):
+#            counter += 1
     return counter
 
 
@@ -32,5 +33,5 @@ if __name__ == "__main__":
     three_sums = get_three_sums(numbers)
     answer2 = count_increases(three_sums)
 
-    print("answer1: ", answer1)    
+    print("answer1: ", answer1)
     print("answer2: ", answer2)
