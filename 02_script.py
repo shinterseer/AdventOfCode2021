@@ -29,8 +29,8 @@ def get_commands(filename):
     lines = file.readlines()
     commands = []
     for line in lines:
-        command = line[:line.find(" ")]
-        amount = int(line[line.find(" "):])
+        command = line.split(' ')[0]
+        amount = int(line.split(' ')[1])
         commands.append([command, amount])
     
     file.close()
