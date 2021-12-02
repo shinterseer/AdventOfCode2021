@@ -4,8 +4,6 @@ def count_increases(numbers):
     counter = 0
     for i in range(1,len(numbers)):
         counter += (numbers[i] > numbers[i-1])
-#        if (numbers[i] > numbers[i-1]):
-#            counter += 1
     return counter
 
 
@@ -19,7 +17,6 @@ def get_three_sums(numbers):
 def get_numbers(filename):
     file = open(filename)
     lines = file.readlines()
-    #numbers = [int(lines[i]) for i in range(len(lines))]
     numbers = [int(line) for line in lines]
     file.close()
     return numbers
