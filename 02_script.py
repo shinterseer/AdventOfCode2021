@@ -46,6 +46,7 @@ if __name__ == "__main__":
     myboat = UBoat()
     for command in commands:
         myboat.move_p1(command)
+        
     print('final postion: ',myboat.pos)
     print("answer part 1: ", myboat.pos[0]*myboat.pos[1])
     
@@ -53,6 +54,6 @@ if __name__ == "__main__":
     myboat = UBoat()
     for command in commands:
         myboat.move_p2(command)
+        
     print('final postion: ',myboat.pos)
     print("answer part 2: ", myboat.pos[0]*myboat.pos[1])
-
