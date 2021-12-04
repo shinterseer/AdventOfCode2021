@@ -42,7 +42,6 @@ def get_lines(filename):
     file.close()
     return lines
 
-
 def get_stuff(filename):
     lines = get_lines(filename)
     drawn = lines[0].split(',')
@@ -50,7 +49,6 @@ def get_stuff(filename):
     boardstrings = lines[1:]
     boards = get_boards(boardstrings)
     return drawn, boards
-
 
 def get_boards(boardstrings):
     boards = []
@@ -76,7 +74,6 @@ def play_bingo(drawn,boards):
         if len(winners) > 1:
             print("Several winners")
             return winners, number
-
 
 def find_loser(drawn,boards):
     for number in drawn:
