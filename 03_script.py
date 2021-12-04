@@ -55,6 +55,9 @@ def reduce_strings(strings,pos,mode):
     return reduced
 
 
+def my_fun(a,b,c):
+    print('my_fun was called')
+
 if __name__ == '__main__':
     filename = '03a_input.txt'
     strings = get_strings(filename)
