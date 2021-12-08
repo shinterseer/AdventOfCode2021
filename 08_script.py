@@ -30,10 +30,8 @@ def question1(out_list):
     return count
 
 def line_to_sets(line):
-    # sets = set({})
     sets = []
     for string in line:
-        # sets.add(set(string))
         sets.append(set(string))
     return sets
 
@@ -41,6 +39,7 @@ def line_to_sets(line):
 def get_translator_nts(line):
     # make dictionary: {0:set0, 1:set1, ...}
     nts = {} # translation of numbers to sets
+    # find 2,3,4,7
     for item in line:
         if len(item) == 2:
             nts[1] = item
@@ -103,8 +102,6 @@ def get_output(list_of_sets,stn):
 
 
 if __name__ == '__main__':
-
-    # start_time = time.time()
 
     filename = '08a_input.txt'
     in_list, out_list = get_digits(filename)
