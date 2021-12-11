@@ -1,6 +1,5 @@
 import numpy as np
-# import time
-# import matplotlib.pyplot as plt
+import time
 
 
 def get_lines(filename):
@@ -75,17 +74,21 @@ class OctoCave:
 
 
 if __name__ == '__main__':
-
+    timer = time.time()
+    
+    # Get Data
     filename = '11a_input.txt'
     # filename = '11a_input_test.txt'
     field = get_field(filename)
+    
+    # Part 1
     oc = OctoCave(field)
-    sync_flash = []
     for i in range(100):
         oc.pass_time()
         oc.new_timestep()
     print('Answer 1: ',oc.num_flashes)
 
+    # Part 2
     oc = OctoCave(field)
     step = 0
     while True:
@@ -96,6 +99,6 @@ if __name__ == '__main__':
         oc.new_timestep()
     print('Answer 2: ',step)
 
-    
+    print('execution time in s: {:3.3}'.format(time.time() - timer))
     
     
