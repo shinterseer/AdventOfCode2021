@@ -1,4 +1,4 @@
-import numpy as np
+# import numpy as np
 import time
 
 
@@ -11,10 +11,7 @@ def get_lines(filename):
 def get_caves(filename):
     lines = get_lines(filename)
     caves = [cave[:-1].split('-') for cave in lines]
-    # for line in lines:
-    #     caves.append(lines[:-1].split('-'))
     return caves
-
 
 
 class Cave:
@@ -70,7 +67,8 @@ def get_legal_steps2(graph,path):
     legal = []
     took_2nd_small = False
     
-    for i in len(path):
+    # check if we already used our "visit small cave twice" - thing
+    for i in range(len(path)):
         node = path[i]
         if not(node.is_big):
             for node2 in path[i+1:]:
@@ -144,40 +142,39 @@ def find_all_paths(caves,part1=True):
     if path[-1].name == 'end':
         relevant_paths.append(path)
 
-    # counter = 0
     while True:
-        # print('number_of_paths: ', len(all_paths))
-        # print('number_of_ relevant paths: ', len(relevant_paths))
-
         # go back until you have a point with open possibilities.
-        # find index of latest possibilities
+        #--------------------------------------------------------        
         index = get_latest_open_poss(path, open_poss)
-        # if this takes you to 'start' and you have no open pos there: break
+        # if no open possibilies: break
         if index == None:
             break
-    
-        # take one step in that direction and complete the path
+        # trim path and possibilities list
         path = path[:index+1] # partial path to latest open possibility
         open_poss = open_poss[:index+1] # partial path to latest open possibility
+
+        # take one step in that direction and complete the path
+        # ------------------------------------------------------
         path.append(open_poss[index][0]) # step in that direction
         open_poss[index].pop(0) # remove the chosen possibility
         if part1:
             path, more_poss = complete_path(caves, path) # complete the path
         else:
-            path, more_poss = complete_path(caves, path, part1=False) # complete the path
-            
+            path, more_poss = complete_path(caves, path, part1=False) # complete the path  
+        #update possibility list
         open_poss = open_poss + more_poss
-        # when at end: if final step == 'end' apend to list
+        
+        # append path to corresponding list (all or relevant)
+        # ----------------------------------------------------
         all_paths.append(path)
         if path[-1].name == 'end':
             relevant_paths.append(path)
-    return all_paths, relevant_paths, open_poss
+    return all_paths, relevant_paths
 
         
 def print_nodes(nodelist):
     for node in nodelist:
         print(node.name)
-
 
 
 if __name__ == '__main__':
@@ -187,30 +184,19 @@ if __name__ == '__main__':
     filename = '12a_input.txt'
     # filename = '12a_input_test.txt'
     lines = get_lines(filename)
-    connections = get_caves(filename)
+    cave_data = get_caves(filename)
     
-    cavesystem = Graph()
-    cavesystem.setup(connections)
-    cavesystem.setup_connections()
-    # s = cavesystem.nodes['start']
-    # e = cavesystem.nodes['end']
-    # path = find_path(graph, s, e)
-    # path, more_poss = complete_path(cavesystem, [s])
-    # print_nodes(path)
-    
-    all_paths, relevant_paths, open_poss = find_all_paths(cavesystem)
-    # print('all_paths: ', all_paths)
-    # print('possibilities : ')
-    # for i in range(len(open_poss)):
-    #     print('open possibilities at ', all_paths[1][i].name)
-    #     print_nodes(open_poss[i])
+    cave_system = Graph()
+    cave_system.setup(cave_data)
+    cave_system.setup_connections()
     
     # Part 1
+    all_paths, relevant_paths = find_all_paths(cave_system)    
     print('Answer 1: ',len(relevant_paths))
 
     # Part 2
-    # all_paths, relevant_paths, open_poss = find_all_paths(cavesystem,part1=False)
-    # print('Answer 2: ', len(relevant_paths))
+    all_paths, relevant_paths = find_all_paths(cave_system,part1=False)
+    print('Answer 2: ', len(relevant_paths))
 
     print('execution time in s: {:3.3}'.format(time.time() - timer))
     
